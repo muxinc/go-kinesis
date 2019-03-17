@@ -89,6 +89,12 @@ func NewWithEndpoint(auth Auth, region, endpoint string) *Kinesis {
 	return &Kinesis{client: NewClient(auth), version: KinesisVersion, region: region, endpoint: endpoint, streamType: "Kinesis"}
 }
 
+// NewWithClientAndEndpoint returns an initialized AWS Kinesis client using a nonstandard endpoint
+// This is useful for configurations using custom Kinesis VPC endpoints
+func NewWithClientAndEndpoint(client *Client, region, endpoint string) *Kinesis {
+	return &Kinesis{client: client, version: KinesisVersion, region: region, endpoint: endpoint, streamType: "Kinesis"}
+}
+
 // Create params object for request
 func makeParams(action string) map[string]string {
 	params := make(map[string]string)
